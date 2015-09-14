@@ -22,6 +22,21 @@ def create(target):
 		'speex-dsp/libspeexdsp/kiss_fft.c',
 		'speex-dsp/libspeexdsp/kiss_fftr.c'
 		])
+	"""
+	myModule.add_header_file([
+		'speex-dsp/include/speex/filterbank.h',
+		'speex-dsp/include/speex/resample.h',
+		'speex-dsp/include/speex/scal.h',
+		'speex-dsp/include/speex/fftwrap.h',
+		'speex-dsp/include/speex/jitter.h',
+		'speex-dsp/include/speex/mdf.h',
+		'speex-dsp/include/speex/preprocess.h',
+		'speex-dsp/include/speex/smallft.h',
+		'speex-dsp/include/speex/buffer.h',
+		'speex-dsp/include/speex/kiss_fft.h',
+		'speex-dsp/include/speex/kiss_fftr.h'
+		])
+	"""
 	# name of the dependency
 	myModule.add_module_depend('z')
 	myModule.compile_version_CC(1999)
