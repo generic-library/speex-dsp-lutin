@@ -7,15 +7,15 @@ def get_desc():
 
 
 def create(target):
-	myModule = module.Module(__file__, 'speex-test-jitter', 'BINARY')
+	my_module = module.Module(__file__, 'speex-test-jitter', 'BINARY')
 	# add extra compilation flags :
-	myModule.add_extra_compile_flags()
+	my_module.add_extra_compile_flags()
 	# add the file to compile:
-	myModule.add_src_file([
+	my_module.add_src_file([
 		'speex-dsp/libspeexdsp/testjitter.c'
 		])
 	# name of the dependency
-	myModule.add_module_depend('speex-dsp')
-	return myModule
+	my_module.add_module_depend('speex-dsp')
+	return my_module
 
 
