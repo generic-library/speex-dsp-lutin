@@ -1,13 +1,28 @@
 #!/usr/bin/python
 import lutin.module as module
 import lutin.tools as tools
+import os
+
+def get_type():
+	return "LIBRARY"
 
 def get_desc():
 	return "Algorithm of speex codec"
 
+def get_licence():
+	return "BSD-3"
 
-def create(target):
-	my_module = module.Module(__file__, 'speex-dsp', 'LIBRARY')
+def get_compagny_type():
+	return "org"
+
+def get_compagny_name():
+	return "Xiph"
+
+def get_version():
+	return [1,2,"rc3"]
+
+def create(target, module_name):
+	my_module = module.Module(__file__, module_name, get_type())
 	# add the file to compile:
 	my_module.add_src_file([
 		'speex-dsp/libspeexdsp/filterbank.c',
@@ -22,25 +37,20 @@ def create(target):
 		'speex-dsp/libspeexdsp/kiss_fft.c',
 		'speex-dsp/libspeexdsp/kiss_fftr.c'
 		])
-	"""
 	my_module.add_header_file([
-		'speex-dsp/include/speex/filterbank.h',
-		'speex-dsp/include/speex/resample.h',
-		'speex-dsp/include/speex/scal.h',
-		'speex-dsp/include/speex/fftwrap.h',
-		'speex-dsp/include/speex/jitter.h',
-		'speex-dsp/include/speex/mdf.h',
-		'speex-dsp/include/speex/preprocess.h',
-		'speex-dsp/include/speex/smallft.h',
-		'speex-dsp/include/speex/buffer.h',
-		'speex-dsp/include/speex/kiss_fft.h',
-		'speex-dsp/include/speex/kiss_fftr.h'
-		])
-	"""
+		'speex-dsp/include/speex/speexdsp_types.h',
+		'speex-dsp/include/speex/speexdsp_config_types.h',
+		'speex-dsp/include/speex/speex_buffer.h',
+		'speex-dsp/include/speex/speex_preprocess.h',
+		'speex-dsp/include/speex/speex_echo.h',
+		'speex-dsp/include/speex/speex_jitter.h',
+		'speex-dsp/include/speex/speex_resampler.h'
+		],
+		destination_path="speex")
 	# name of the dependency
 	my_module.add_module_depend('z')
-	my_module.compile_version_CC(1999)
-	my_module.add_export_path(tools.get_current_path(__file__) + "/speex-dsp/include")
+	my_module.compile_version("c", 1999)
+	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex-dsp/include"))
 	# configure library:
 	# Make use of ARM4 assembly optimizations
 	#my_module.compile_flags('c', "-DARM4_ASM=1")
