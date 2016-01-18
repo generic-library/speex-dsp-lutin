@@ -48,7 +48,7 @@ def create(target, module_name):
 		],
 		destination_path="speex")
 	# name of the dependency
-	my_module.add_module_depend('z')
+	my_module.add_module_depend(['z', 'm'])
 	my_module.compile_version("c", 1999)
 	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex-dsp/include"))
 	# configure library:
