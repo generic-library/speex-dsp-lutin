@@ -23,11 +23,11 @@ def get_compagny_name():
 
 def create(target, module_name):
 	my_module = module.Module(__file__, module_name, get_type())
-	my_module.add_extra_compile_flags()
+	my_module.add_extra_flags()
 	my_module.add_src_file([
 		'speex-dsp/libspeexdsp/testdenoise.c'
 		])
-	my_module.add_module_depend('speex-dsp')
+	my_module.add_depend('speex-dsp')
 	return my_module
 
 
