@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import lutin.module as module
+import lutin.debug as debug
 import lutin.tools as tools
 import os
 
@@ -20,9 +20,8 @@ def get_compagny_name():
 
 def get_version():
 	return [1,2,"rc3"]
-
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+	
+def configure(target, my_module):
 	# add the file to compile:
 	my_module.add_src_file([
 		'speex-dsp/libspeexdsp/filterbank.c',
@@ -50,7 +49,7 @@ def create(target, module_name):
 	# name of the dependency
 	my_module.add_depend(['z', 'm'])
 	my_module.compile_version("c", 1999)
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex-dsp/include"))
+	my_module.add_path("speex-dsp/include")
 	# configure library:
 	# Make use of ARM4 assembly optimizations
 	#my_module.add_flag('c', "-DARM4_ASM=1")
@@ -85,6 +84,6 @@ def create(target, module_name):
 	# Use C99 variable-size arrays */
 	my_module.add_flag('c', "-DVAR_ARRAYS=1")
 	
-	return my_module
+	return True
 
 
